@@ -1,33 +1,31 @@
-# README
+# Multi-Threaded Application Using POSIX Threads (C)
 
-## Multi-Threaded Application Using POSIX Threads (C)
-
-### Description
+## Description
 
 This project demonstrates the basic concepts of Operating Systems using the C programming language and POSIX threads (`pthread`).
 
 The application includes:
 
-* Creation of multiple threads (3 worker threads)
-* Thread synchronization using a mutex
-* Resource control using a semaphore
-* A simple Round Robin scheduling simulation
-* Prevention of race conditions
-* Deadlock prevention by acquiring and releasing synchronization primitives in a consistent order
+- Creation of multiple threads (3 worker threads)
+- Thread synchronization using a mutex
+- Resource control using a semaphore
+- A simple Round Robin scheduling simulation
+- Prevention of race conditions
+- Deadlock prevention by acquiring and releasing synchronization primitives in a consistent order
 
 ---
 
 ## Files
 
-* `Task1.c` – Source code
-* `README.md` – Project documentation
+- `Task1.c` – Source code
+- `README.md` – Project documentation
 
 ---
 
 ## Requirements
 
-* GCC compiler with POSIX thread support (MinGW-w64 or MSYS2 on Windows)
-* Linux users can use the default GCC compiler
+- GCC compiler with POSIX thread support (MinGW-w64 or MSYS2 on Windows)
+- Linux users can use the default GCC compiler
 
 ---
 
@@ -63,6 +61,69 @@ Task1.exe
 
 ---
 
+## Program Flow Diagram
+
+```text
+                   [ Program Start: main() ]
+                               │
+                               ▼
+                     [ Initialize Mutex ]
+                               │
+                               ▼
+                  [ Initialize Semaphore ]
+                               │
+                               ▼
+                     [ Create Threads ]
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+         [ Main Thread ]             [ Spawn Worker Thread ]
+                │                             │
+                │                             ▼
+                │                    [ Worker Function ]
+                │                             │
+                │                             ▼
+                │                     [ Semaphore Wait ]
+                │                             │
+                │                             ▼
+                │                       [ Mutex Lock ]
+                │                             │
+                │                             ▼
+                │                  ┌─────────────────────┐
+                │                  │  CRITICAL SECTION   │
+                │                  │ Update Shared Count │
+                │                  └─────────────────────┘
+                │                             │
+                │                             ▼
+                │                      [ Mutex Unlock ]
+                │                             │
+                │                             ▼
+                │                     [ Semaphore Post ]
+                │                             │
+                │                             ▼
+                │                      [ Thread Exit ]
+                │                             │
+                ▼                             │
+┌───────────────────────────────────────────────────────────┐
+│             OS Round Robin Scheduling (Simulation)        │
+│       Executed after all worker threads have finished     │
+└───────────────────────────────────────────────────────────┘
+                │
+                ▼
+         [ Join Threads (pthread_join) ]
+                │
+                ▼
+       [ Print Final Counter Value ]
+                │
+                ▼
+     [ Destroy Mutex & Semaphore ]
+                │
+                ▼
+              [ Program End ]
+```
+
+---
+
 ## Program Features
 
 ### 1. Thread Creation
@@ -71,7 +132,9 @@ The program creates three worker threads using `pthread_create()`.
 
 ### 2. Synchronization
 
-A mutex protects the shared counter so that only one thread can update it at a time. A semaphore limits the number of threads that may enter the protected section simultaneously.
+A mutex protects the shared counter so that only one thread can update it at a time.
+
+A counting semaphore limits access to **two threads**, while the mutex ensures that only one thread updates the shared resource at any given moment.
 
 ### 3. Round Robin Scheduling
 
@@ -91,19 +154,18 @@ The program prevents deadlocks by ensuring every thread acquires and releases sy
 
 The program displays:
 
-* Thread creation and execution
-* Updates to the shared counter
-* Final counter value
-* Round Robin scheduling simulation
-* Thread completion messages
+- Thread creation and execution
+- Updates to the shared counter
+- Final counter value
+- Round Robin scheduling simulation
+- Thread completion messages
 
-(The order of thread execution may vary because thread scheduling is controlled by the operating system.)
+> **Note:** The order of thread execution may vary because thread scheduling is controlled by the operating system.
 
 ---
 
 ## Author
 
-Name: Suchit Ratna Bajracharya
+**Name:** Suchit Ratna Bajracharya
 
-Course: Operating Systems and Security
-
+**Course:** Operating Systems and Security
