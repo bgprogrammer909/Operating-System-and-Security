@@ -164,8 +164,21 @@ The program displays:
 
 ---
 
-## Author
+<img src="https://github.com/bgprogrammer909.png" width="150" height="150" style="border-radius:50%;" alt="Suchit Ratna Bajracharya"/>
+</a>
 
-**Name:** Suchit Ratna Bajracharya
+### **Suchit Ratna Bajracharya**
 
+Computer Science Student • Software Developer • AI/ML engineer
+
+<p>
+  <a href="https://github.com/bgprogrammer909">
+    <img src="https://img.shields.io/badge/GitHub-bgprogrammer909-181717?style=for-the-badge&logo=github" alt="GitHub"/>
+  </a>
+</p>
+
+🔗 **GitHub Profile:**  
+https://github.com/bgprogrammer909
+
+</div>
 **Course:** Operating Systems and Security
