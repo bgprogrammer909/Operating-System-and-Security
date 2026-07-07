@@ -2,14 +2,6 @@
 =========================================================
 Virtual Memory Management Simulator
 ---------------------------------------------------------
-Features:
-1. Configurable Page Size
-2. FIFO Page Replacement
-3. LRU Page Replacement
-4. Page Fault Tracking
-5. Hit/Miss Ratio
-6. Detailed Memory Logging
-=========================================================
 */
 
 #include <stdio.h>
