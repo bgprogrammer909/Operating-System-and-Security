@@ -1,35 +1,136 @@
-# Multi-Threaded Application Using POSIX Threads (C)
+# Operating Systems and Security
 
-## Description
+A collection of **Operating Systems** laboratory assignments developed in **C**, demonstrating fundamental OS concepts including **multithreading, memory management, CPU scheduling, and network programming** using POSIX APIs.
 
-This project demonstrates the basic concepts of Operating Systems using the C programming language and POSIX threads (`pthread`).
-
-The application includes:
-
-- Creation of multiple threads (3 worker threads)
-- Thread synchronization using a mutex
-- Resource control using a semaphore
-- A simple Round Robin scheduling simulation
-- Prevention of race conditions
-- Deadlock prevention by acquiring and releasing synchronization primitives in a consistent order
+The repository is designed for educational purposes and showcases practical implementations of synchronization mechanisms, scheduling algorithms, memory management techniques, and TCP client-server communication.
 
 ---
 
-## Files
+## Project Structure
 
-- `Task1.c` – Source code
-- `README.md` – Project documentation
+```text
+Operating-System-and-Security/
+│
+├── Task1.c              # POSIX Threads & Synchronization
+├── Task2.c              # Memory Management
+├── Task3.c              # CPU Scheduling
+├── Task4Server.c        # Multithreaded TCP Server
+├── Task4Client.c        # Interactive/Demo TCP Client
+├── Task4Clients.c       # Concurrent Client Test
+└── README.md
+```
 
 ---
 
-## Requirements
+# Tasks Overview
 
-- GCC compiler with POSIX thread support (MinGW-w64 or MSYS2 on Windows)
-- Linux users can use the default GCC compiler
+| Task       | Description                                                                                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Task 1** | Multi-threaded application using POSIX Threads (`pthread`) with mutexes, semaphores, race condition handling, deadlock prevention, and Round Robin scheduling simulation. |
+| **Task 2** | Memory Management simulation demonstrating memory allocation and management concepts.                                                                                     |
+| **Task 3** | CPU Scheduling simulation implementing process scheduling algorithms and performance calculations.                                                                        |
+| **Task 4** | Multi-threaded TCP Client-Server application implementing authentication, command processing, and concurrent client handling.                                             |
 
 ---
 
-## Compilation
+# Features
+
+### Task 1
+
+* POSIX Threads (`pthread`)
+* Mutex Synchronization
+* Counting Semaphore
+* Shared Resource Protection
+* Race Condition Prevention
+* Deadlock Prevention
+* Round Robin Scheduling Simulation
+
+### Task 2
+
+* Memory Management Simulation
+* Dynamic Memory Allocation
+* Memory Block Management
+* Allocation & Deallocation
+* Memory Statistics
+
+### Task 3
+
+* CPU Scheduling Algorithms
+* Waiting Time Calculation
+* Turnaround Time Calculation
+* Scheduling Simulation
+* Performance Evaluation
+
+### Task 4
+
+* TCP Socket Programming
+* POSIX Threads
+* Multi-threaded Server
+* Client Authentication
+* Interactive Command Processing
+* Concurrent Client Support
+* Input Validation
+* Network Communication
+
+---
+
+# Program Architecture
+
+```text
+                     Operating Systems
+                             │
+      ┌──────────────────────┼──────────────────────┐
+      ▼                      ▼                      ▼
+  Multithreading      Memory Management      CPU Scheduling
+      │                      │                      │
+      └──────────────────────┴──────────────────────┘
+                             │
+                             ▼
+                  TCP Network Programming
+```
+
+---
+
+# Task Workflow
+
+```text
+                 Start
+                   │
+                   ▼
+          Select Required Task
+                   │
+      ┌────────────┼─────────────┐
+      ▼            ▼             ▼
+   Task 1       Task 2        Task 3
+      │            │             │
+      └────────────┴─────────────┘
+                   │
+                   ▼
+               Task 4
+                   │
+                   ▼
+            Display Results
+```
+
+---
+
+# Requirements
+
+* GCC Compiler
+* POSIX Threads (`pthread`)
+* TCP Socket Support
+* Linux / macOS
+
+### Windows
+
+* MSYS2
+* MinGW-w64
+
+---
+
+# Compilation
+
+## Task 1
 
 ### Linux
 
@@ -37,7 +138,7 @@ The application includes:
 gcc Task1.c -o Task1 -pthread
 ```
 
-### Windows (MSYS2 or MinGW-w64)
+### Windows
 
 ```bash
 gcc Task1.c -o Task1.exe -pthread
@@ -45,7 +146,63 @@ gcc Task1.c -o Task1.exe -pthread
 
 ---
 
-## Execution
+## Task 2
+
+### Linux
+
+```bash
+gcc Task2.c -o Task2
+```
+
+### Windows
+
+```bash
+gcc Task2.c -o Task2.exe
+```
+
+---
+
+## Task 3
+
+### Linux
+
+```bash
+gcc Task3.c -o Task3
+```
+
+### Windows
+
+```bash
+gcc Task3.c -o Task3.exe
+```
+
+---
+
+## Task 4
+
+### Compile Server
+
+```bash
+gcc Task4Server.c -o Server -pthread
+```
+
+### Compile Client
+
+```bash
+gcc Task4Client.c -o Client
+```
+
+### Compile Concurrent Client Test
+
+```bash
+gcc Task4Clients.c -o MultiClient -pthread
+```
+
+---
+
+# Execution
+
+## Task 1
 
 ### Linux
 
@@ -61,115 +218,152 @@ Task1.exe
 
 ---
 
-## Program Flow Diagram
+## Task 2
 
-```text
-                   [ Program Start: main() ]
-                               │
-                               ▼
-                     [ Initialize Mutex ]
-                               │
-                               ▼
-                  [ Initialize Semaphore ]
-                               │
-                               ▼
-                     [ Create Threads ]
-                               │
-                ┌──────────────┴──────────────┐
-                ▼                             ▼
-         [ Main Thread ]             [ Spawn Worker Thread ]
-                │                             │
-                │                             ▼
-                │                    [ Worker Function ]
-                │                             │
-                │                             ▼
-                │                     [ Semaphore Wait ]
-                │                             │
-                │                             ▼
-                │                       [ Mutex Lock ]
-                │                             │
-                │                             ▼
-                │                  ┌─────────────────────┐
-                │                  │  CRITICAL SECTION   │
-                │                  │ Update Shared Count │
-                │                  └─────────────────────┘
-                │                             │
-                │                             ▼
-                │                      [ Mutex Unlock ]
-                │                             │
-                │                             ▼
-                │                     [ Semaphore Post ]
-                │                             │
-                │                             ▼
-                │                      [ Thread Exit ]
-                │                             │
-                ▼                             │
-┌───────────────────────────────────────────────────────────┐
-│             OS Round Robin Scheduling (Simulation)        │
-│       Executed after all worker threads have finished     │
-└───────────────────────────────────────────────────────────┘
-                │
-                ▼
-         [ Join Threads (pthread_join) ]
-                │
-                ▼
-       [ Print Final Counter Value ]
-                │
-                ▼
-     [ Destroy Mutex & Semaphore ]
-                │
-                ▼
-              [ Program End ]
+### Linux
+
+```bash
+./Task2
+```
+
+### Windows
+
+```bash
+Task2.exe
 ```
 
 ---
 
-## Program Features
+## Task 3
 
-### 1. Thread Creation
+### Linux
 
-The program creates three worker threads using `pthread_create()`.
+```bash
+./Task3
+```
 
-### 2. Synchronization
+### Windows
 
-A mutex protects the shared counter so that only one thread can update it at a time.
-
-A counting semaphore limits access to **two threads**, while the mutex ensures that only one thread updates the shared resource at any given moment.
-
-### 3. Round Robin Scheduling
-
-The program simulates Round Robin CPU scheduling using predefined burst times and a fixed time quantum.
-
-### 4. Race Condition Handling
-
-The shared counter is protected by a mutex to prevent multiple threads from modifying it simultaneously.
-
-### 5. Deadlock Prevention
-
-The program prevents deadlocks by ensuring every thread acquires and releases synchronization objects in the same order.
+```bash
+Task3.exe
+```
 
 ---
 
-## Expected Output
+## Task 4
 
-The program displays:
+### Start Server
 
-- Thread creation and execution
-- Updates to the shared counter
-- Final counter value
-- Round Robin scheduling simulation
-- Thread completion messages
+```bash
+./Server
+```
 
-> **Note:** The order of thread execution may vary because thread scheduling is controlled by the operating system.
+### Start Client
+
+```bash
+./Client
+```
+
+### Demo Mode
+
+```bash
+./Client --demo
+```
+
+### Concurrent Client Test
+
+```bash
+./MultiClient
+```
+
+---
+
+# Network Communication
+
+```text
+                  +---------------------+
+                  |  Multithreaded      |
+                  |      Server         |
+                  +----------+----------+
+                             │
+        ┌────────────────────┼────────────────────┐
+        ▼                    ▼                    ▼
+   Client 1             Client 2             Client 3
+        │                    │                    │
+      AUTH                 AUTH                AUTH
+      ECHO                 TIME                 ADD
+      QUIT                 QUIT                QUIT
+```
+
+---
+
+# Task Summary
+
+## Task 1
+
+* Creates multiple worker threads
+* Synchronizes shared resources
+* Uses mutexes and semaphores
+* Simulates Round Robin Scheduling
+
+---
+
+## Task 2
+
+* Simulates memory allocation
+* Demonstrates memory management concepts
+* Allocates and releases memory blocks
+
+---
+
+## Task 3
+
+* Simulates CPU scheduling
+* Calculates waiting and turnaround times
+* Displays scheduling performance
+
+---
+
+## Task 4
+
+* Starts a TCP server
+* Accepts multiple clients simultaneously
+* Authenticates users
+* Processes client commands
+* Supports concurrent communication
+
+---
+
+# Technologies Used
+
+* C Programming
+* POSIX Threads (`pthread`)
+* GCC Compiler
+* TCP/IP Socket Programming
+* Operating System Concepts
+
+---
+
+# Expected Output
+
+Each task demonstrates different Operating System concepts:
+
+* Thread creation and synchronization
+* Memory allocation and management
+* CPU scheduling simulation
+* Client-server communication
+* Concurrent client handling
+* Authentication and command processing
+
+> **Note:** Thread execution order and concurrent client behaviour may vary depending on the operating system scheduler.
 
 ---
 
 <img src="https://github.com/bgprogrammer909.png" width="150" height="150" style="border-radius:50%;" alt="Suchit Ratna Bajracharya"/>
-</a>
 
-### **Suchit Ratna Bajracharya**
+## Suchit Ratna Bajracharya
 
-Computer Science Student • Software Developer • AI/ML engineer
+**Computer Science Student • Software Developer • AI/ML Engineer**
 
 <p>
   <a href="https://github.com/bgprogrammer909">
@@ -177,8 +371,11 @@ Computer Science Student • Software Developer • AI/ML engineer
   </a>
 </p>
 
-🔗 **GitHub Profile:**  
+**GitHub Profile**
 https://github.com/bgprogrammer909
 
-</div>
-**Course:** Operating Systems and Security
+---
+
+## Course
+
+**Operating Systems and Security**
