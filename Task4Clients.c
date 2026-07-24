@@ -1,12 +1,3 @@
-/*
- * Extra test (not required, but good evidence for the report):
- * launches several client connections concurrently, from separate
- * pthreads, to prove the server truly handles multiple clients at
- * the same time.
- *
- * Compile:  gcc -Wall -pthread multi_client_test.c -o multi_client_test
- */
-
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
